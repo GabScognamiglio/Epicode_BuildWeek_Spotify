@@ -71,7 +71,6 @@ body {
     background-color: black;
     box-sizing: border-box;
     font-family: "Circular", sans-serif;
-    font-weight: 500;
 }
 
 ::-webkit-scrollbar {
@@ -129,6 +128,15 @@ svg:hover {
 }
 
 /* Main */
+main{
+    height: calc((100vh) - 112px);
+    overflow: scroll;
+}
+
+#immagineAnnuncio{
+    aspect-ratio: 1/1;
+}
+
 .mainHeight{
     min-height: calc((100vh) - 112px);
 }
@@ -149,6 +157,28 @@ svg:hover {
 #btnBlack:hover {
     transform: scale(1.1);
 }
+
+#cardOrizzontale{
+    min-height: 80px;
+    background-color: #404040;
+}
+
+.card{
+    background-color: #232323;
+    font-size: 14px;
+}
+
+/*BODY Artist.html*/
+
+#artistImage{
+    min-height: 400px;
+}
+
+.sfondoGradiente{
+    height: 500px;
+    background: linear-gradient(to bottom, #404040, black);
+}
+
 
 /*PLAYER*/
 .music-player {
@@ -257,6 +287,7 @@ i:hover{
     width: 30%;
     background-color: #ccc4;
 }
+
 .progress{
     position: relative;
     height: 100%;
