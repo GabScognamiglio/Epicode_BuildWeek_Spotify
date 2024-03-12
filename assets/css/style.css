@@ -95,15 +95,11 @@ body {
 /*NAVBAR*/
 .nav-link{
     text-decoration: none;
-}
-
-.nav-link:link,
-.nav-link:visited{
     color: #999 !important;
+    font-size: large !important;
 }
 
-.nav-link:link:hover,
-.nav-link:visited:hover{
+.nav-link:hover{
     color: white !important;
 }
 
@@ -166,6 +162,10 @@ main{
 .card{
     background-color: #232323;
     font-size: 14px;
+}
+
+.backgroundGray{
+    background-color: #404040;
 }
 
 /*BODY Artist.html*/

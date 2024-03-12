@@ -18,7 +18,7 @@ prevBtn = document.getElementById("prev");
 nextBtn = document.getElementById("next");
 playBtn = document.getElementById("play");
 background = document.getElementById("bg-img");
-
+let progressbar = document.getElementById('progress-bar');
 const music = new Audio();
 
 let musicIndex = 0;
@@ -64,7 +64,7 @@ function loadMusic(song, musicIndex) {
     artist.textContent = song[musicIndex].artist;
    
     image.src = song[musicIndex].cover;
-    background.src = song[musicIndex].cover;
+    //background.src = song[musicIndex].cover;
   
 }
 
@@ -78,7 +78,7 @@ function updateProgressBar() {
   const { duration, currentTime } = music;
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
-  console.log(progressPercent);
+  
   const formatTime = (time) => String(Math.floor(time)).padStart(2, "0");
   /* durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(
     duration % 60
@@ -90,9 +90,12 @@ function updateProgressBar() {
 }
 
 function setProgressBar(e) {
-  const width = playerProgress.clientWidth;
+  const width = progressbar.clientWidth;
   const clickX = e.offsetX;
+  
+  console.log(clickX)
   music.currentTime = (clickX / width) * music.duration;
+ 
 }
 
 playBtn.addEventListener("click", togglePlay);
@@ -101,7 +104,8 @@ nextBtn.addEventListener("click", () => changeMusic(1));
 music.addEventListener("ended", () => changeMusic(1));
 
 music.addEventListener("timeupdate", updateProgressBar);
-playerProgress.addEventListener("click", setProgressBar);
+progressbar.addEventListener("click", setProgressBar);
+
 
 
 
