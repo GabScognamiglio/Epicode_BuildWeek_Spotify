@@ -126,7 +126,7 @@ svg:hover {
 /* Main */
 main{
     height: calc((100vh) - 112px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 a:link,
@@ -189,6 +189,8 @@ a:visited:hover {
 
 #artistImage{
     min-height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .sfondoGradiente{
@@ -344,4 +346,10 @@ i:hover{
 }
 .volume-bar .progress-bar:hover .progress::after{
     --size: .8em;
+}
+
+
+.newclass{
+    color: #999;
+    font-size: 0.8rem;
 }

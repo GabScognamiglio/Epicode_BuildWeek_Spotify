@@ -53,6 +53,8 @@ function grissinbon() {
 
 //ricerca in un array
 // risultati in un array di un oggetto
+//numero minuti + sec album
+//onlyfans
 
 
 
@@ -93,13 +95,11 @@ async function searchFetch (textInput) {
     
 }
 
-function populateMainArtist (title, album,  imgUrl, artist, albumId) {
+function populateMainArtist (title, album,  imgUrl, artist, albumId, artistId) {
     titoloneMain.innerText = title;
     albumMain.innerHTML = `<a href="album.html?id=${albumId}">${album}</a>`;
     immagineAnnuncio.src = imgUrl;
-    artistaMain.innerHTML = `<a href="artist.html?id=${artist}">${artist}</a>`;
-
-
+    artistaMain.innerHTML = `<a href="artist.html?id=${artistId}">${artist}</a>`;
 }
 
 function passaCanzone (title, artist, mp3Url, imageUrl){
@@ -121,16 +121,16 @@ async function mainFetch (searchArtist) {
         let albumId = result.data[0].album.id;
         let imageUrl = result.data[0].album.cover_big;
         let artist = result.data[0].artist.name;
+        let artistId = result.data[0].artist.id;
         let mp3Url = result.data[0].preview;
-
-        populateMainArtist(title, album, imageUrl, artist, albumId);
+      console.log(result)
+        populateMainArtist(title, album, imageUrl, artist, albumId, artistId);
        let musicFetched =  passaCanzone(title,artist,mp3Url,imageUrl);
        musicFetch(musicFetched)
     }
      catch (error) {
         console.error(error);
     }
-    
 }
 
 btnGreenPlay.addEventListener('click', function(){
@@ -140,7 +140,6 @@ btnGreenPlay.addEventListener('click', function(){
       } else {
         btnGreenPlay.innerText='Play';
       }
-
 })
 
 /* PLAYER */
@@ -181,11 +180,8 @@ function playMusic() {
   music.play();
 }
 
-
 function cambioVolume(volume){
-  
   music.volume = volume;
-
 }
 
 function pauseMusic() {
@@ -235,7 +231,6 @@ function setProgressBar(e) {
   
   console.log(clickX)
   music.currentTime = (clickX / width) * music.duration;
- 
 }
 
 playBtn.addEventListener("click", togglePlay);
@@ -259,12 +254,7 @@ async function musicFetch (musicFetched) {
             artist: musicFetched.artist,
           }
         ]
-         
-
-        
         loadMusic(songs, 0)
-       
-    
 }
 
 /* CreateCardsHorizontal */
