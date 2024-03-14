@@ -46,3 +46,32 @@ const init = () => {
 window.onload = function () {
     init();
 }
+
+
+
+
+
+
+
+
+`<div class="row">
+<div class="col-1 text-end newclass pt-2">
+  <p>1</p>
+</div>
+<div class="col-1">
+  <img
+    src="${imgUrl}"
+    alt="" width="40px" />
+</div>
+<div class="col-6 px-4">
+  <p class="title pt-2">
+    ${title}
+  </p>
+</div>
+<div class="col-md-2 newclass pt-2">
+  <p>${numberFan}</p>
+</div>
+<div class="col-md-2 px-4 newclass pt-2">
+  <p>${duration}</p>
+</div>
+</div>`

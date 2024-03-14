@@ -199,6 +199,17 @@ a:visited:hover {
 }
 
 
+/* FOOTER */
+
+.linkFooter:link,
+.linkFooter:visited{
+    color: #999;
+}
+
+.linkFooter{
+    font-size: 14px;
+}
+
 /*PLAYER*/
 .music-player {
     --primary-color: #ddd;

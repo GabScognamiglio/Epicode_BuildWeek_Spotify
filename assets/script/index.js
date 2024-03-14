@@ -18,7 +18,7 @@ const urlAlbum = 'https://deezerdevs-deezer.p.rapidapi.com/album/'
 const options = {
     method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '5e9533492cmshc7bda6f6c4226a8p18d33djsnce600cc50cb3',
+		'X-RapidAPI-Key': '8285387448msh3de7dcef18a5d35p162bdfjsn1fef9a1ab463',
 		'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
 	}
 }
@@ -257,27 +257,56 @@ async function musicFetch (musicFetched) {
         loadMusic(songs, 0)
 }
 
-/* CreateCardsHorizontal */
-/* let horizontalCard = 
-`<div class="col-12 col-md-4 col-xl-3">
-<div class="row rounded-2">
+
+
+
+async function buongiornoFetch () {
+  let albumIdScelti = [321004297, 51001312, 78839882, 144718432, 125628232, 384473747];
+  for (let i = 0; i<albumIdScelti.length; i++){
+try {
+    const response = await fetch(urlAlbum+albumIdScelti[i], options);
+    const result = await response.json();
+    let oggetto = {
+      albumName : result.title,
+      imgUrl : result.cover_xl,
+      artistId : result.artist.id,
+      artistName : result.artist.name,
+      albumId : result.id,
+    }
+
+
+  let horizontalCard = document.createElement('div');
+  horizontalCard.classList.add('col-12');
+  horizontalCard.classList.add('col-md-6');
+  horizontalCard.classList.add('col-xl-4');
+  horizontalCard.innerHTML=
+`<div class="row rounded-2">
   <div class="col-4 my-2 d-flex align-items-center"><img
-      src="${imgurl}"
+      src="${oggetto.imgUrl}"
       alt="fotoAlbum" class="img-fluid">
   </div>
-  <div class="col-8 my-2 fw-bold d-flex align-items-center flex-column">
-    <a href='artist.html?id=${artist}'>${artist}</a>
-    <a href='album.html?id=${albumId}'>${album}</a> 
+  <div class="col-8 my-2 fw-bold d-flex flex-column">
+    <a href='artist.html?id=${oggetto.artistId}'>${oggetto.artistName}</a>
+    <a href='album.html?id=${oggetto.albumId}'>${oggetto.albumName}</a> 
   </div>
-</div>
-</div>`; */
+</div>`; 
 
+orizzontaliContainer.append(horizontalCard);
 
+    
+}
+ catch (error) {
+    console.error(error);
+}
+  }
+ 
+}
 
 /* INIT */
 const init = () => {
-
-    mainFetch(fabriFibra);
+  
+    buongiornoFetch ();
+    mainFetch(metallica);
     searchAlbums(metallica);
     searchInputBtn.addEventListener('click', function(e){
         e.preventDefault();
