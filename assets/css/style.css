@@ -123,6 +123,14 @@ svg:hover {
     fill: white;
 }
 
+.albumLibreria{
+    font-size: 14px !important;
+}
+
+.img-libreria{
+    max-width: 70px;
+}
+
 /* Main */
 main{
     height: calc((100vh) - 112px);
@@ -194,10 +202,20 @@ a:visited:hover {
 }
 
 .sfondoGradiente{
-    height: 500px;
     background: linear-gradient(to bottom, #404040, black);
 }
 
+/*BODY Album.html*/
+.min40{
+    min-width: 40px;
+}
+
+#albumBackground{
+    min-height: 400px;
+    backdrop-filter: blur(15px);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 /* FOOTER */
 
@@ -364,3 +382,23 @@ i:hover{
     color: #999;
     font-size: 0.8rem;
 }
+
+
+/*PLAYER ESTERNO*/
+
+
+  /* Modal */
+
+  .modal{
+    margin: 0 auto;
+  }
+
+  .modal-dialog{
+    max-width: none;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  .modal-content{
+    height: 100vh;
+    background-color: black;
+  }

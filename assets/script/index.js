@@ -1,4 +1,4 @@
-
+let arrayMusicPlaying = [];
 /* ricerche nostre */
 let mozart = 'mozart';
 let paul = 'paulkalbrenner';
@@ -28,6 +28,14 @@ const titoloneMain = document.getElementById('titoloneMain');
 const albumMain = document.getElementById ('albumMain');
 const btnGreenPlay = document.getElementById ('btnGreenPlay');
 
+
+/* Search */
+const imgRisultato1 = document.getElementById('imgRisultato1');
+const titoloRisultato1 = document.getElementById('titoloRisultato1');
+const artistaRisultato1 = document.getElementById('artistaRisultato1');
+const containerBraniSearch = document.getElementById('containerBraniSearch');
+const resultsContainer = document.getElementById('resultsContainer');
+const containerAlbumSearch = document.getElementById('containerAlbumSearch');
 const displayHome = () => {
     searchContainer.style.display = 'none';
     homeContainer.style.display = 'block';
@@ -51,25 +59,15 @@ function grissinbon() {
     }
 }
 
-//ricerca in un array
-// risultati in un array di un oggetto
-//numero minuti + sec album
-//onlyfans
-
-
-
 async function searchAlbums (preferito){
     try {
         const response = await fetch(url+preferito, options);
         const result = await response.json();
-        console.log(result);
+       
         let albumId = result.data[0].album.id;
         try {
             const responseAlbum = await fetch(urlAlbum +albumId, options);
             const resultAlbum = await responseAlbum.json();
-            console.log(resultAlbum);
-            
-
         }
          catch (error) {
             console.error(error);
@@ -86,14 +84,58 @@ async function searchFetch (textInput) {
     try {
         const response = await fetch(url+textInput, options);
         const result = await response.json();
-        console.log(result);
-       
+        console.log(result)
+        let searchedSongs = result.data;
+        imgRisultato1.src = searchedSongs[0].album.cover_medium;
+        titoloRisultato1.innerText = searchedSongs[0].title;
+
+        artistaRisultato1.innerHTML = `<a href="artist.html?id=${searchedSongs[0].artist.id}">${searchedSongs[0].artist.name}</a>`
+        containerBraniSearch.innerHTML = '';
+        containerAlbumSearch.innerHTML = '';
+       for(let i =1 ; i< 6; i++ ){
+        let containerBrano = document.createElement('div');
+        containerBrano.classList.add('container-fluid')
+        containerBrano.classList.add('d-flex')
+        containerBrano.classList.add('justify-content-between')
+        containerBrano.classList.add('align-items-center')
+        containerBrano.innerHTML = `<div class="d-flex">
+        <img
+          src="${searchedSongs[i].album.cover_medium}"
+          alt="..." class="miniatura">
+        <div class="d-flex flex-column justify-content-center">
+          <p class="fs-5 fw-bold mb-0">${searchedSongs[i].title}</p>
+          <p class="mb-0  \"><a href="artist.html?id=${searchedSongs[i].artist.id}">${searchedSongs[i].artist.name}</p>
+        </div>
+      </div>
+      <div>
+        <p class="mb-0">Durata</p>
+      </div>`     
+
+      let containerAlbum = document.createElement('div');
+      containerAlbum.classList.add('col-12')
+      containerAlbum.classList.add('col-md-4')
+      containerAlbum.classList.add('col-xl-3')
+      containerAlbum.classList.add('my-3')
+      containerAlbum.innerHTML = ` <div class="card border-0" style="width: 12rem;">
+      <img
+        src="${searchedSongs[i].album.cover_medium}"
+        class="card-img-top p-2 rounded rounded-4" alt="...">
+      <div class="card-body">
+        <h5 class="card-title fw-bold fs-6"><a href="album.html?id=${searchedSongs[i].album.id}">${searchedSongs[i].album.title}</a></h5>
+        <p class="card-text"><a href="artist.html?id=${searchedSongs[i].artist.id}">${searchedSongs[i].artist.name}</p>
+
+      </div>
+    </div>`    
+    
+    containerBraniSearch.append(containerBrano);
+        containerAlbumSearch.append(containerAlbum);
+  } 
+       resultsContainer.classList.remove('d-none');
     }
      catch (error) {
         console.error(error);
     }
-    
-}
+};
 
 function populateMainArtist (title, album,  imgUrl, artist, albumId, artistId) {
     titoloneMain.innerText = title;
@@ -123,7 +165,7 @@ async function mainFetch (searchArtist) {
         let artist = result.data[0].artist.name;
         let artistId = result.data[0].artist.id;
         let mp3Url = result.data[0].preview;
-      console.log(result)
+      
         populateMainArtist(title, album, imageUrl, artist, albumId, artistId);
        let musicFetched =  passaCanzone(title,artist,mp3Url,imageUrl);
        musicFetch(musicFetched)
@@ -204,9 +246,12 @@ function loadMusic(song, musicIndex) {
   
 }
 
-function changeMusic(direction) {
-  musicIndex = (musicIndex + direction + songs.length) % songs.length;
-  loadMusic(songs, musicIndex);
+function changeMusic(direction, song) {
+  console.log(direction, song)
+  musicIndex = (musicIndex + direction + song.length) % song.length;
+  console.log(musicIndex)
+  loadMusic(song[direction], musicIndex);
+  pauseMusic()
   playMusic();
 }
 
@@ -229,14 +274,14 @@ function setProgressBar(e) {
   const width = progressbar.clientWidth;
   const clickX = e.offsetX;
   
-  console.log(clickX)
+
   music.currentTime = (clickX / width) * music.duration;
 }
 
 playBtn.addEventListener("click", togglePlay);
-prevBtn.addEventListener("click", () => changeMusic(-1));
-nextBtn.addEventListener("click", () => changeMusic(1));
-music.addEventListener("ended", () => changeMusic(1));
+prevBtn.addEventListener("click", () => changeMusic(-1, arrayMusicPlaying));
+nextBtn.addEventListener("click", () => changeMusic(1, arrayMusicPlaying));
+music.addEventListener("ended", () => changeMusic(1, arrayMusicPlaying));
 
 music.addEventListener("timeupdate", updateProgressBar);
 progressbar.addEventListener("click", setProgressBar);
@@ -258,14 +303,14 @@ async function musicFetch (musicFetched) {
 }
 
 
-
-
 async function buongiornoFetch () {
   let albumIdScelti = [321004297, 51001312, 78839882, 144718432, 125628232, 384473747];
+  let arraySongs = [];
   for (let i = 0; i<albumIdScelti.length; i++){
 try {
     const response = await fetch(urlAlbum+albumIdScelti[i], options);
     const result = await response.json();
+
     let oggetto = {
       albumName : result.title,
       imgUrl : result.cover_xl,
@@ -274,6 +319,18 @@ try {
       albumId : result.id,
     }
 
+    arraySongs[i] = result.tracks.data.map(songData => ({
+          
+      path: songData.preview,
+      displayName: songData.title,
+      cover: songData.album.cover_medium,
+      artist: songData.artist.name,
+
+    }));
+     
+    arrayMusicPlaying.push(arraySongs[i])
+   
+   
 
   let horizontalCard = document.createElement('div');
   horizontalCard.classList.add('col-12');
@@ -281,32 +338,76 @@ try {
   horizontalCard.classList.add('col-xl-4');
   horizontalCard.innerHTML=
 `<div class="row rounded-2">
-  <div class="col-4 my-2 d-flex align-items-center"><img
+  <div class="col-4 my-2 d-flex align-items-center"><button onclick='loadMusic(arrayMusicPlaying[${i}], 0)' class='btn'><img
+    
       src="${oggetto.imgUrl}"
-      alt="fotoAlbum" class="img-fluid">
+      alt="fotoAlbum" class="img-fluid"></button>
   </div>
-  <div class="col-8 my-2 fw-bold d-flex flex-column">
-    <a href='artist.html?id=${oggetto.artistId}'>${oggetto.artistName}</a>
-    <a href='album.html?id=${oggetto.albumId}'>${oggetto.albumName}</a> 
+  <div class="col-8 my-2 d-flex flex-column">
+    <a class='text-body-secondary' href='artist.html?id=${oggetto.artistId}'>${oggetto.artistName}</a>
+    <a class='fw-bold' href='album.html?id=${oggetto.albumId}'>${oggetto.albumName}</a> 
   </div>
 </div>`; 
 
-orizzontaliContainer.append(horizontalCard);
-
-    
+orizzontaliContainer.append(horizontalCard);    
 }
  catch (error) {
     console.error(error);
 }
   }
- 
+  console.log(arrayMusicPlaying)
+     loadMusic(arrayMusicPlaying[2], 0)
+  console.log(arraySongs);
+}
+
+
+/*LIBRERIA*/
+const contenitoreLibreria = document.getElementById('contenitoreLibreria')
+const libreriaIdStatica = [401032, 610400, 401346, 109943, 531687612, 111209, 301784, 6856717];
+let libreria = [];
+
+async function fetchLibreria(array) {
+  for (let i = 0; i < array.length; i++) {
+    try {
+      const response = await fetch(urlAlbum + array[i], options);
+      const result = await response.json();
+      libreria.push(result)
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(libreria)
+  populateLibreria(libreria)
+};
+
+function populateLibreria(array){
+  for (let i=0; i<array.length; i++){
+    let div= document.createElement('div');
+    div.classList.add('row');
+    div.classList.add('my-3');
+    // div.classList.add('backgroundGray');
+    div.classList.add('albumLibreria');
+    div.innerHTML=`
+    <div class="col-4 col-xl-3 d-flex justify-content-center align-items-center">
+              <img src="${array[i].cover_xl}" alt="..." class="img-fluid img-libreria">
+            </div>
+            <div class="col-8 col-xl-9 d-flex flex-column justify-content-center">
+              <span class="fw-bold m-0"><a href="album.html?id=${array[i].id}">${array[i].title}</a></span>
+              <span class="mb-0"><a href="artist.html?id=${array[i].artist.id}">${array[i].artist.name}</a></span>
+            </div>
+     </div>
+    `
+    contenitoreLibreria.appendChild(div);
+  }
 }
 
 /* INIT */
 const init = () => {
   
     buongiornoFetch ();
-    mainFetch(metallica);
+    fetchLibreria(libreriaIdStatica);
+    mainFetch(metallica); 
     searchAlbums(metallica);
     searchInputBtn.addEventListener('click', function(e){
         e.preventDefault();

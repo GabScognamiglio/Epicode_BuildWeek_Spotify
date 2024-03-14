@@ -41,21 +41,16 @@
             </li>
           </ul>
         </nav>
-        <aside class="parte_grigia rounded-3 p-3 my-2">
+        <aside class="parte_grigia rounded-3 p-3 my-2" id="contenitoreLibreria">
           <!--da popolare con js-->
-          <a href="#" class="nav-link fs-6 mb-3"><svg data-encore-id="icon" role="img" aria-hidden="true"
+          <a href="#" class="nav-link fs-6 mb-4"><svg data-encore-id="icon" role="img" aria-hidden="true"
               viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 bneLcE">
               <path
                 d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z">
               </path>
-            </svg> Libreria</a>
-          <p>early stage emily syndrome (sett-ott 2022)
-          <p>
-          <p>Be the young</p>
-          <p>'...' cit Kimiko (lug-ago 2022)</p>
-          <p id="5327691">Album Fabio</p>
-
-
+            </svg>
+            Libreria
+          </a>
         </aside>
       </div>
 
@@ -113,84 +108,32 @@
               </form>
             </div>
           </div>
-          <div class="container-fluid" id="resultsContainer">
+          <div class="container-fluid d-none" id="resultsContainer">
             <div class="row my-4">
               <div class="col-12 col-lg-5">
                 <h4 class="fw-bold">Risultato più rilevante</h4>
-                <div class="container-fluid backgroundGray rounded-3 p-3 my-2">
-                  <img src="" alt="..." class="w-50">
-                  <h5 id="titoloRisultato1" class="fw-bold"></h5>
-                  <p id="artistaRisultato1"></p>
+                <div class="container-fluid backgroundGray rounded-3 p-3 my-2 d-flex flex-column">
+                  <img src="" alt="..." id="imgRisultato1" class="w-50">
+                  <p id="titoloRisultato1" class="fw-bold"></a>
+                  <p id="artistaRisultato1"></a>
                 </div>
               </div>
               <div id="braniContainer" class="col-12 col-lg-7">
                 <h4 class="fw-bold">Brani</h4>
-                <div class="container-fluid d-flex justify-content-between align-items-center">
-                  <div class="d-flex">
-                    <img
-                      src="https://hips.hearstapps.com/hmg-prod/images/eminem-a-k-a-marshall-bruce-mathers-iii-attends-a-ceremony-news-photo-1698936282.jpg?crop=1.00xw:0.667xh;0,0.0380xh&resize=640:*"
-                      alt="..." class="miniatura">
-                    <div class="d-flex flex-column justify-content-center">
-                      <p class="fs-5 fw-bold mb-0">Brano</p>
-                      <p class="mb-0  \">Artista</p>
-                    </div>
-                  </div>
-                  <div>
-                    <p class="mb-0">Durata</p>
-                  </div>
+                <div id="containerBraniSearch">
+
                 </div>
               </div>
               <div class="container-fluid">
                 <div class="row">
                   <h4 class="fw-bold mt-3">Album</h4>
-                  <div class="col-12 col-md-4 col-xl-3 my-3">
-                    <div class="card border-0" style="width: 12rem;">
-                      <img
-                        src="https://hips.hearstapps.com/hmg-prod/images/eminem-a-k-a-marshall-bruce-mathers-iii-attends-a-ceremony-news-photo-1698936282.jpg?crop=1.00xw:0.667xh;0,0.0380xh&resize=640:*"
-                        class="card-img-top p-2 rounded rounded-4" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">Playlist - card mockup</h5>
-                        <p class="card-text">descrizione playlist/artisti</p>
+                  <div id="containerAlbumSearch" class="row">
 
-                      </div>
-                    </div>
                   </div>
-                  <div class="col-12 col-md-4 col-xl-3 my-3">
-                    <div class="card border-0" style="width: 12rem;">
-                      <img
-                        src="https://hips.hearstapps.com/hmg-prod/images/eminem-a-k-a-marshall-bruce-mathers-iii-attends-a-ceremony-news-photo-1698936282.jpg?crop=1.00xw:0.667xh;0,0.0380xh&resize=640:*"
-                        class="card-img-top p-2 rounded rounded-4" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">Playlist - card mockup</h5>
-                        <p class="card-text">descrizione playlist/artisti</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 col-xl-3 my-3">
-                    <div class="card border-0" style="width: 12rem;">
-                      <img
-                        src="https://hips.hearstapps.com/hmg-prod/images/eminem-a-k-a-marshall-bruce-mathers-iii-attends-a-ceremony-news-photo-1698936282.jpg?crop=1.00xw:0.667xh;0,0.0380xh&resize=640:*"
-                        class="card-img-top p-2 rounded rounded-4" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">Playlist - card mockup</h5>
-                        <p class="card-text">descrizione playlist/artisti</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 col-xl-3 my-3">
-                    <div class="card border-0" style="width: 12rem;">
-                      <img
-                        src="https://hips.hearstapps.com/hmg-prod/images/eminem-a-k-a-marshall-bruce-mathers-iii-attends-a-ceremony-news-photo-1698936282.jpg?crop=1.00xw:0.667xh;0,0.0380xh&resize=640:*"
-                        class="card-img-top p-2 rounded rounded-4" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">Playlist - card mockup</h5>
-                        <p class="card-text">descrizione playlist/artisti</p>
-
-                      </div>
-                    </div>
-                  </div>
+                 
+                  
+                  
+                  
                 </div>
               </div>
             </div>
@@ -287,13 +230,58 @@
               <span id="duration">0:30</span>
             </div>
           </div>
-          <div class="other-features">
+          <div class="other-features  align-items-center">
+           
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-expand-alt"></i></button>
             <i class="fas fa-list-ul"></i>
             <i class="fas fa-desktop"></i>
             <div class="volume-bar">
               <i class="fas fa-volume-down"></i>
               <div class="progress-bar">
                 <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--MODALE-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <div class="backgroundPlayer">
+            <img src="" id="bg-img" />
+          </div>
+      
+          <div class="containerPlayer">
+            <div class="player-img">
+              <img src="" class="active" id="cover" />
+            </div>
+            <h2 id="music-title"></h2>
+            <h3 id="music-artist"></h3>
+      
+            <div class="player-progress" id="player-progress">
+              <div class="progress" id="progress"></div>
+              <div class="music-duration">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:30</span>
+              </div>
+            </div>
+            <div class="player-controls">
+              <div>
+              <input class="progress-bar" type="range" id="volumeCanzone" min="0" max="1" step="0.1" value="0.2" onchange="cambioVolume(this.value)">
+              </div>
+              <div>
+              <i class="fa-solid fa-backward" title="Previous" id="prev"></i>
+              <i class="fa-solid fa-play" title="Play" id="play"></i>
+              <i class="fa-solid fa-forward" title="Next" id="next"></i>
               </div>
             </div>
           </div>
