@@ -90,11 +90,11 @@ Se vuoi contribuire allo sviluppo di MyMusic, sei il benvenuto! Siamo sempre all
 
  ### Autori
 
- - Enrico Cirotto
- - Fabio Gallingani
- - Kevin Loffredi
- - Gabriele Scognamiglio
- - Pavlo Pastushenko
+ - [Enrico Cirotto](https://github.com/enricocirotto)
+ - [Fabio Gallingani](https://github.com/fabiogalli95)
+ - [Kevin Loffredi](https://github.com/Kevin-Lof)
+ - [Gabriele Scognamiglio](https://github.com/GabScognamiglio)
+ - [Pavlo Pastushenko](https://github.com/PavloPastushenkoo)
 
  ### Licenza 
 

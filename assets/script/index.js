@@ -1,5 +1,6 @@
 let arrayMusicPlaying = [];
 let singleAlbum = [];
+let braniFetch = [];
 /* ricerche nostre */
 let mozart = 'mozart';
 let paul = 'paulkalbrenner';
@@ -14,8 +15,8 @@ const searchBtn = document.getElementById('searchBtn');
 const searchContainer = document.getElementById('searchContainer');
 const searchInput = document.getElementById('searchInput');
 const searchInputBtn = document.getElementById('searchInputBtn');
-const url = 'https://deezerdevs-deezer.p.rapidapi.com/search?q=';
-const urlAlbum = 'https://deezerdevs-deezer.p.rapidapi.com/album/'
+const url = 'https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=';
+const urlAlbum = 'https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/'
 const options = {
   method: 'GET',
   headers: {
@@ -68,7 +69,20 @@ function grissinbon() {
   } else {
     return "Buonanotte";
   }
+};
+
+const params = new URLSearchParams(location.search);
+const cerca = params.get('id');
+
+function redirectCerca(){
+  console.log(cerca)
+  if (cerca) {
+    homeContainer.style.display='none';
+    searchContainer.style.display='block'
+  }
 }
+
+
 async function searchAlbums(input) {
   try {
     const response = await fetch(urlAlbum + preferito, options);
@@ -128,13 +142,13 @@ async function playAlbums(preferito) {
     console.error(error);
   }
 }
-let braniFetch = [];
+
 async function searchFetch(textInput) {
 
   try {
-    const response = await fetch(url + textInput+ '/top?limit=5', options);
+    const response = await fetch(url + textInput, options);
     const result = await response.json();
-    console.log(result)
+      console.log(result)
     resultsContainer.style.display = 'block';
     if(result.error){
       resultsContainer.style.display = 'none';
@@ -148,7 +162,9 @@ async function searchFetch(textInput) {
       containerStaticSearch.classList.add('d-none')
     }
 
+
     let searchedSongs = result.data;
+    
     braniFetch = result.data.map(songData => ({
           
       path: songData.preview,
@@ -157,7 +173,7 @@ async function searchFetch(textInput) {
       artist: songData.artist.name,
 
     }));
-    console.log(braniFetch)
+   
     imgRisultato1.src = searchedSongs[0].album.cover_medium;
    
     titoloRisultato1.innerText = searchedSongs[0].title;
@@ -249,11 +265,13 @@ async function mainFetch(searchArtist) {
 }
 
 btnGreenPlay.addEventListener('click', function () {
-
-  togglePlay();
+  loadMusic(arrayMusicPlaying[1], 1)
+   
   if (isPlaying) {
     btnGreenPlay.innerText = 'Pause';
+    pauseMusic();
   } else {
+    playMusic()
     btnGreenPlay.innerText = 'Play';
   }
 })
@@ -272,6 +290,23 @@ nextBtn = document.getElementById("next");
 playBtn = document.getElementById("play");
 background = document.getElementById("bg-img");
 let progressbar = document.getElementById('progress-bar');
+let volumeCanzone_modal = document.getElementById('volumeCanzone_modal');
+imageModal = document.getElementById("cover_modal");
+titleModal = document.getElementById("music-title_modal");
+artistModal = document.getElementById("music-artist_modal");
+currentTimeelModal = document.getElementById("current-time_modal");
+durationElModal = document.getElementById("duration_modal");
+progressModal = document.getElementById("progress_modal");
+playerProgressModal = document.getElementById("player-progress_modal");
+prevBtnModal = document.getElementById("prev_modal");
+nextBtnModal = document.getElementById("next_modal");
+playBtnModal = document.getElementById("play_modal");
+backgroundModal = document.getElementById("bg-imgModal");
+
+
+
+
+
 const music = new Audio();
 
 let musicIndex = 0;
@@ -291,8 +326,10 @@ function playMusic() {
   isPlaying = true;
   //cambiare il bottone del play
   playBtn.classList.replace("fa-play", "fa-pause");
+  playBtnModal.classList.replace("fa-play", "fa-pause");
   //settare hover del titolo del bottone
   playBtn.setAttribute("title", "Pause");
+  playBtnModal.setAttribute("title", "Pause");
   music.play();
 }
 
@@ -304,8 +341,10 @@ function pauseMusic() {
   isPlaying = false;
   //cambiare il bottone del play
   playBtn.classList.replace("fa-pause", "fa-play");
+  playBtnModal.classList.replace("fa-pause", "fa-play");
   //settare hover del titolo del bottone
   playBtn.setAttribute("title", "Play");
+  playBtnModal.setAttribute("title", "Play");
   music.pause();
 }
 
@@ -315,12 +354,18 @@ function loadMusic(song, musicIndex) {
   console.log(singleAlbum)
   music.src = song[musicIndex].path;
   title.textContent = song[musicIndex].displayName;
-  artist.textContent = song[musicIndex].artist;
+  titleModal.textContent = song[musicIndex].displayName;
+  artistModal.textContent = song[musicIndex].artist;
+  console.log(song[musicIndex].cover)
+  imageModal.src = song[musicIndex].cover;
 
+  artist.textContent = song[musicIndex].artist;
   image.src = song[musicIndex].cover;
-  background.src = song[musicIndex].cover;
+  backgroundModal.src = song[musicIndex].cover;
 
 }
+
+
 function loadAlbumMusic(arrayAlbum, musicIndex) {
   music.src = arrayAlbum[musicIndex].path;
   title.textContent = arrayAlbum[musicIndex].displayName;
@@ -338,17 +383,21 @@ function changeMusic(direction) {
   music.src = singleAlbum[musicIndex].path;
   title.textContent = singleAlbum[musicIndex].displayName;
   artist.textContent = singleAlbum[musicIndex].artist;
-
+  artistModal.textContent = singleAlbum[musicIndex].artist;
+  titleModal.textContent = singleAlbum[musicIndex].displayName;
   image.src = singleAlbum[musicIndex].cover;
+  imageModal.src = singleAlbum[musicIndex].cover;
+  backgroundModal.src = singleAlbum[musicIndex].cover;
   background.src = singleAlbum[musicIndex].cover;
-  pauseMusic()
+  
   playMusic();
 }
 
 function updateProgressBar() {
   const { duration, currentTime } = music;
   const progressPercent = (currentTime / duration) * 100;
-  progress.style.width = `${progressPercent}%`;
+  progress.style.width = `${progressPercent}%`;/* 
+  progressbar.style.width =  `${progressPercent}%`; */
 
   const formatTime = (time) => String(Math.floor(time)).padStart(2, "0");
   /* durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(
@@ -356,6 +405,9 @@ function updateProgressBar() {
   )}`; */
   durationEl.textContent = '0:30';
   currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(
+    currentTime % 60
+  )}`;
+  currentTimeelModal.textContent = `${formatTime(currentTime / 60)}:${formatTime(
     currentTime % 60
   )}`;
 }
@@ -371,10 +423,13 @@ function setProgressBar(e) {
 playBtn.addEventListener("click", togglePlay);
 prevBtn.addEventListener("click", () => changeMusic(-1));
 nextBtn.addEventListener("click", () => changeMusic(1));
+playBtnModal.addEventListener("click", togglePlay);
+prevBtnModal.addEventListener("click", () => changeMusic(-1));
+nextBtnModal.addEventListener("click", () => changeMusic(1));
 music.addEventListener("ended", () => changeMusic(1));
-
 music.addEventListener("timeupdate", updateProgressBar);
 progressbar.addEventListener("click", setProgressBar);
+progressModal.addEventListener('click', setProgressBar);
 
 
 
@@ -524,7 +579,7 @@ function populateStaticSearch(array) {
     let tiPiaceCard = document.createElement('div');
     tiPiaceCard.classList.add('card');
     tiPiaceCard.classList.add('border-0');
-    tiPiaceCard.classList.add('m-4');
+    tiPiaceCard.classList.add('m-3');
     tiPiaceCard.style.width = '15rem'
     tiPiaceCard.innerHTML = `
                 <button class='btn' onclick='playAlbums(${array[i].id})'>
@@ -540,7 +595,7 @@ function populateStaticSearch(array) {
     let searchCard1 = document.createElement('div')
     searchCard1.classList.add('card');
     searchCard1.classList.add('border-0');
-    searchCard1.classList.add('m-4');
+    searchCard1.classList.add('m-3');
     searchCard1.style.width = '15rem'
     searchCard1.innerHTML = `
                           <button class='btn' onclick='playAlbums(${array[i].id})'>
@@ -558,8 +613,21 @@ function populateStaticSearch(array) {
   }
 };
 
+const estraiIndiceAnswers = () => {
+  let indiceAnswers = Math.floor(Math.random() * risposte.length);
+  
+  if (!answersEstratte.includes(indiceAnswers)) {
+    // Se il numero non è già presente, lo pusha nell'array
+    answersEstratte.push(indiceAnswers);
+} else {
+    // Se il numero è già presente, richiama la funzione ricorsivamente per ottenere un nuovo numero unico
+    estraiIndiceAnswers();
+}
+}; 
+
 /* INIT */
 const init = () => {
+  redirectCerca();
 
   buongiornoFetch();
   fetchStaticSearch(staticSearchAlbums);
@@ -577,4 +645,3 @@ const init = () => {
 window.onload = () => {
   init()
 }
-

@@ -98,7 +98,7 @@ function populateTracklist(array){
         <p>${i+1}</p>
       </div>
       <div class="col-5 ps-4">
-      <button class='btn' onclick='playFirstSong(arraySongs[${i}].path, arraySongs[${i}].displayName, arraySongs[${i}].artist, arraySongs[${i}].cover)'>
+      <button class='btn text-start p-0' onclick='playFirstSong(arraySongs[${i}].path, arraySongs[${i}].displayName, arraySongs[${i}].artist, arraySongs[${i}].cover)'>
         <p class="fw-bold mb-1" id="music-title">${array[i].title}</p>
         </button>
         <p class="mt-0">${array[i].artist.name}</p>

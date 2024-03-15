@@ -24,6 +24,8 @@ let arrayArtist = [];
 const popolari = document.getElementById('popolari')
 let arraySongs = [];
 
+
+
 async function searchArtistId(id) {
 
   try {

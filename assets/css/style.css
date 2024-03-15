@@ -163,8 +163,13 @@ a:visited:hover {
 }
 
 #btnGreen,
-#btnGreenPlay{
+#btnGreenPlay,
+.btnVerdeSpotify
+{
     background-color: #1ED760;
+}
+.btnVerdeSpotify{
+    color: black;
 }
 
 #btnBlack{
@@ -208,6 +213,10 @@ a:visited:hover {
     background: linear-gradient(to bottom, #404040, black);
 }
 
+.title:hover{
+    color: #1ED760;
+}
+
 /*BODY Album.html*/
 .min40{
     min-width: 40px;
@@ -219,7 +228,9 @@ a:visited:hover {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+#music-title:hover{
+    color: #1ED760;
+}
 /* FOOTER */
 
 .linkFooter:link,
@@ -407,8 +418,134 @@ i:hover{
     height: 100vh;
     background-color: black;
   }
-
+  .modal-header{
+    border-bottom: 0;
+  }
   .noUnderline{
     text-decoration: none !important; 
     color: inherit; 
+  }
+
+
+
+  
+
+.backgroundPlayer{
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: 1;
+   }
+  
+   #bg-imgModal{
+    
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 50%;
+    min-height: 50%;
+    filter: blur(15px);
+    -webkit-filter: blur(50px);
+    transform: scale(1.1);
+    
+   }
+   #cover_modal{
+    border-radius:20px;
+   }
+  
+  .containerPlayer,
+  .modal-content,
+  .modal-header{
+    z-index: 2;
+  }
+
+
+
+  .player-progress-modal{
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 40px 20px 35px;
+    height: 6px;
+    width: 90%;
+   }
+   
+  
+   .progress-modal{
+    background-color: #212121;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+   }
+  
+   .music-duration-modal{
+    position: relative;
+    top: -25px;
+    display: flex;
+    justify-content: space-between;
+   } 
+  
+   .player-controls-modal{
+    position:relative;
+    top: -15px;
+    left: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 30px;
+   }
+  
+   .fa-solid{
+    font-size: 30px;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+   }
+  
+   .fa-solid:hover{
+    filter: brightness(40%);
+   }
+  
+   .play-button-modal{
+    font-size: 44px;
+    position: relative;
+    top: 3px;
+   }
+  
+    .progress-barM{
+    height: 10px;
+    border-radius: 10px;
+    width: 75%;
+  }
+  
+  #music-title_modal,
+  #music-artist_modal{
+   
+    padding: 20px 10px;
+    margin: 0;
+  }
+
+  .containerPlayer{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;  
+  }
+
+  .containerPlayer:hover{
+    box-shadow: 10px 10px 15px rgb(22, 22, 22);
+  }
+
+  .player-img{
+    display: flex;
+    justify-content: center;
   }
