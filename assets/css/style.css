@@ -101,6 +101,7 @@ body {
 
 .nav-link:hover{
     color: white !important;
+    
 }
 
 .parte_grigia{
@@ -148,6 +149,7 @@ a:visited:hover {
     text-decoration: underline;
 }
 
+
 #immagineAnnuncio{
     aspect-ratio: 1/1;
 }
@@ -188,6 +190,7 @@ a:visited:hover {
     background-color: #404040;
 }
 
+
 .miniatura{
     width: 50px;
     margin-right: 10px;
@@ -223,7 +226,9 @@ a:visited:hover {
 .linkFooter:visited{
     color: #999;
 }
-
+ .social{
+    text-decoration: none !important
+}
 .linkFooter{
     font-size: 14px;
 }
@@ -401,4 +406,9 @@ i:hover{
   .modal-content{
     height: 100vh;
     background-color: black;
+  }
+
+  .noUnderline{
+    text-decoration: none !important; 
+    color: inherit; 
   }

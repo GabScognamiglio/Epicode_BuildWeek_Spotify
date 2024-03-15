@@ -1,30 +1,17 @@
 # Ricreazione della piattaforma streaming "Spotify"
 
-grande pavlo che si accolla il readme <3
-grande Enri che non vuole scrivere <3
-🥰
-
-
-comunismo ☭
-☭  ☭  ☭  ☭
-☭  ☭  ☭  ☭  
-☭  ☭  ☭  ☭
-☭  ☭  ☭  ☭
-Readme Piu bello della storia 
-
-
 ## Descrizione
-La nostra piattaforma offre una vasta collezione dei brani musicali, artisti locali e internazionali. Grazie al interfaccia molto semplice e intuitiva puoi fare la ricerca dei tuoi brani preferiti  o scoprire nuovi artisti e i sucessi del momento, tutto con la massima qualita del audio.
+La nostra piattaforma offre una vasta collezione dei brani musicali, artisti locali e internazionali. Grazie al interfaccia molto semplice e intuitiva puoi fare la ricerca dei tuoi brani preferiti  o scoprire nuovi artisti e i successi del momento, tutto con la massima qualita del audio.
+
 - **Ascolto illimitato** : Accedi a milioni di brani da tutto il mondo senza limiti. Ascolta la musica ovunque tu sia.
 
 - **Playlist personalizzate** (in fase di svilupppo): La nostra piattaforma ti offre i brani musicali in base alle tue preferenze e i brani che hai ascoltato in precedenza. 
-
 
 - **Scoperta Musicale** : Scopri i nuovi artisti e brani proposti nella nostra sezione "Buongiorno"
 
 - **Un Player "Accativante"** : Sappiamo che anche l'occhio fa la sua parte e proprio per questo ci siamo impegnati molto a creare un player con un design unico, potrai sciegliere se vuoi ascoltare i tuoi brani preferiti con il player a tutto schermo o nella sua versione ridotta. 
 
-- **Interfaccia Intuitiva** : La nostra piattaforma permette di fare la ricerca dei vostri brani prefferiti grazie ad una interfaccia molto intuitiva e facile da usare, la divisione in sezioni ti permette di navigare in modo veloce, senza il bisogno di staccarti dalla tua musica preferita.
+- **Interfaccia Intuitiva** : La nostra piattaforma permette di fare la ricerca dei vostri brani preferiti grazie ad una interfaccia molto intuitiva e facile da usare, la divisione in sezioni ti permette di navigare in modo veloce, senza il bisogno di staccarti dalla tua musica preferita.
 
 ## Descrizione Tecnica
 
@@ -34,20 +21,18 @@ La nostra piattaforma offre una vasta collezione dei brani musicali, artisti loc
 - CSS per lo stile e il layout
 - JavaScript per la logica di interazione e la gestione degli eventi
 - Bootstrap e FontAwesome per lo stile e le icone
-- Una piccola quantita di script personalizzato per la gestione della riproduzione audio e la manipolazione del DOM
+- Una piccola quantità di script personalizzato per la gestione della riproduzione audio e la manipolazione del DOM
 
 - **Api Esterna** : La nostra piattaforma utilizza un API (non quelle che fanno il miele) Dezzer esterna per accedere a cataloghi grazie alla sua architettura modulare e alle technologie moderne utilizzate.
-
 
 ## Descrizione delle pagine 
 
 - **Pagina principale** :
 
- La pagina principale e suddivisa in due sezioni principali:
+ La pagina principale è suddivisa in due sezioni principali:
 
  - La barra laterale sinistra contiene i pulsanti per la navigazione tra la home e la pagina di ricerca.
  - La sezione principale mostra le informazioni sui brani in riproduzione, insieme a suggerimenti e playlist raccomandate.
-
 
 
 - **Pagina Del Artista** :
@@ -64,9 +49,9 @@ La pagina del Album e dedicata alla visualizzazione di informazioni dettagliate 
 Presenta i seguenti elementi principali: 
 
 - La barra laterale
-- Informazioni sull'album: copertina, titolo, artista e altre informazioni rillevanti
+- Informazioni sull'album: copertina, titolo, artista e altre informazioni rilevanti
 - elenco dei brani completo che sono contenuti nel Album
-- possibilita di riprodure direttamente dalla pagina del Album
+- possibilità di riprodure direttamente dalla pagina del Album
 
 - **Pagina del Player**: 
 
@@ -105,16 +90,15 @@ Se vuoi contribuire allo sviluppo di MyMusic, sei il benvenuto! Siamo sempre all
 
  ### Autori
 
- - Enrico Cirotto (il muzzu)
- - Fabio Gallingani (megaBrain)
- - Kevin Loffredi (Art director)
- - Gabriele Scognamiglio (Il leader indiscusso)
- - Pavlo Pastushenko (Umile schiavo)
+ - Enrico Cirotto
+ - Fabio Gallingani
+ - Kevin Loffredi
+ - Gabriele Scognamiglio
+ - Pavlo Pastushenko
 
  ### Licenza 
 
-
- Non c'è alcuna licenza su questa cosa. ❤️
+ Non c'è alcuna licenza su questo progetto.
 
 
 

@@ -1,11 +1,28 @@
+const image = document.getElementById("cover");
+title = document.getElementById("music-title");
 
+artist = document.getElementById("music-artist");
+currentTimeEl = document.getElementById("current-time");
+durationEl = document.getElementById("duration");
+progress = document.getElementById("progress");
+playerProgress = document.getElementById("player-progress");
+prevBtn = document.getElementById("prev");
+nextBtn = document.getElementById("next");
+playBtn = document.getElementById("play");
+playGreen = document.getElementById('playGreen');
+background = document.getElementById("bg-img");
+let progressbar = document.getElementById('progress-bar');
+const music = new Audio();
+
+let musicIndex = 0;
+let isPlaying = false;
 const urlArtist = 'https://corsproxy.io/?https://api.deezer.com/artist/'
 const artistName = document.getElementById("artistName");
 const fanNumber = document.getElementById("fanNumber");
 const artistImage = document.getElementById("artistImage");
 let arrayArtist = [];
 const popolari = document.getElementById('popolari')
-
+let arraySongs = [];
 
 async function searchArtistId(id) {
 
@@ -18,14 +35,35 @@ async function searchArtistId(id) {
     console.log(resultIdArtist) //oggetto
 
     arrayArtist = result.data;
-    console.log(arrayArtist);
+    arraySongs = result.data.map(songData => ({
+          
+      path: songData.preview,
+      displayName: songData.title,
+      cover: songData.album.cover_medium,
+      artist: songData.artist.name,
+
+    }));
+    console.log(arraySongs)
+    
     populateArtistFirst(arrayArtist[0].artist.name, resultIdArtist.nb_fan, resultIdArtist.picture_xl)
     populatePopolari(arrayArtist);
+    playFirstSong(arraySongs[0].path, arraySongs[0].displayName, arraySongs[0].artist, arraySongs[0].cover)
   }
   catch (error) {
     console.log(error);
   }
 
+}
+
+function playFirstSong(musicSrc, titleText, artistText, imageSrc){
+  music.src = musicSrc;
+    
+  title.textContent = titleText;
+  artist.textContent = artistText;
+  
+  image.src = imageSrc;
+ 
+ // background.src = backgroundSrc;
 }
 
 function populateArtistFirst(nameArtist, numberFan, imageArtist) {
@@ -59,9 +97,11 @@ function populatePopolari(array) {
         alt="" width="40px" />
     </div>
     <div class="col-6 px-4">
+    <button class='btn' onclick='playFirstSong(arraySongs[${i}].path, arraySongs[${i}].displayName, arraySongs[${i}].artist, arraySongs[${i}].cover)'>
       <p class="title pt-2">
         ${array[i].title}
       </p>
+      </button>
     </div>
     <div class="col-md-2 newclass pt-2">
       <p>${array[i].rank}</p>
@@ -126,6 +166,90 @@ function populateLibreria(array){
   }
 }
 
+
+
+/* Player */
+
+
+function togglePlay() {
+  if (isPlaying) {
+    pauseMusic();
+   // playGreen.innerText='Play';
+  } else {
+    playMusic();
+    //playGreen.innerText='Pause';
+  }
+}
+
+function playMusic() {
+  isPlaying = true;
+  //cambiare il bottone del play
+  playBtn.classList.replace("fa-play", "fa-pause");
+  playGreen.classList.replace('fa-place', 'fa-pause');
+  //settare hover del titolo del bottone
+
+  playBtn.setAttribute("title", "Pause");
+  music.play();
+}
+
+function cambioVolume(volume){
+  music.volume = volume;
+}
+
+function pauseMusic() {
+  isPlaying = false;
+  //cambiare il bottone del play
+  playBtn.classList.replace("fa-pause", "fa-play");
+  playGreen.classList.replace("fa-pause", "fa-play")
+  //settare hover del titolo del bottone
+  playBtn.setAttribute("title", "Play");
+
+  music.pause();
+}
+function changeMusic(direction) {
+
+  musicIndex = (musicIndex + direction + arraySongs.length) % arraySongs.length;
+  music.src = arraySongs[musicIndex].path;
+    title.textContent = arraySongs[musicIndex].displayName;
+    artist.textContent = arraySongs[musicIndex].artist;
+   
+    image.src = arraySongs[musicIndex].cover;
+    //background.src = arraySongs[musicIndex].cover;
+  pauseMusic()
+  playMusic();
+}
+
+function updateProgressBar() {
+  const { duration, currentTime } = music;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+  
+  const formatTime = (time) => String(Math.floor(time)).padStart(2, "0");
+  /* durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(
+    duration % 60
+  )}`; */
+  durationEl.textContent = '0:30';
+  currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(
+    currentTime % 60
+  )}`;
+}
+
+function setProgressBar(e) {
+  const width = progressbar.clientWidth;
+  const clickX = e.offsetX;
+  
+
+  music.currentTime = (clickX / width) * music.duration;
+}
+
+playBtn.addEventListener("click", togglePlay);
+playGreen.addEventListener('click', togglePlay);
+prevBtn.addEventListener("click", () => changeMusic(-1));
+nextBtn.addEventListener("click", () => changeMusic(1));
+music.addEventListener("ended", () => changeMusic(1));
+
+music.addEventListener("timeupdate", updateProgressBar);
+progressbar.addEventListener("click", setProgressBar);
 
 const init = () => {
   fetchLibreria(libreriaIdStatica)
